@@ -1,47 +1,54 @@
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
-import NavBar from './components/NavBar';
-import RecipeList from './components/RecipeList';
-import RecipeDetail from './components/RecipeDetail';
-import NewRecipeForm from './components/NewRecipeForm';
-import RecipeSearch from './components/RecipeSearch';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import NavBar from './NavBar';
+import RecipeList from './RecipeList';
+import RecipeDetail from './RecipeDetail';
+import NewRecipeForm from './NewRecipeForm';
+import './styles.css';
 
 function App() {
   const [recipes, setRecipes] = useState([]);
-  const [filteredRecipes, setFilteredRecipes] = useState([]);
 
   useEffect(() => {
     fetch('http://localhost:3001/recipes')
-      .then(res => res.json())
-      .then(data => {
+      .then((res) => res.json())
+      .then((data) => {
+        console.log('Fetched recipes:', data);
         setRecipes(data);
-        setFilteredRecipes(data);
-      });
+      })
+      .catch((error) => console.error('Error fetching recipes:', error));
   }, []);
 
   function addRecipe(newRecipe) {
     setRecipes([...recipes, newRecipe]);
-    setFilteredRecipes([...recipes, newRecipe]);
+  }
+
+  function toggleStar(id) {
+    setRecipes(recipes.map(recipe =>
+      recipe.id === id ? { ...recipe, starred: !recipe.starred } : recipe
+    ));
+  }
+
+  function deleteRecipe(id) {
+    setRecipes(recipes.filter(recipe => recipe.id !== id));
   }
 
   return (
     <Router>
       <NavBar />
-      <Switch>
-        <Route exact path="/">
-          <RecipeSearch recipes={recipes} setFilteredRecipes={setFilteredRecipes} />
-          <RecipeList recipes={filteredRecipes} />
-        </Route>
-        <Route path="/recipes/:id">
-          <RecipeDetail recipes={recipes} />
-        </Route>
-        <Route path="/new-recipe">
-          <NewRecipeForm addRecipe={addRecipe} />
-        </Route>
-      </Switch>
+      <Routes>
+        <Route path="/" element={
+          <RecipeList
+            recipes={recipes}
+            toggleStar={toggleStar}
+            deleteRecipe={deleteRecipe}
+          />
+        } />
+        <Route path="/recipes/:id" element={<RecipeDetail recipes={recipes} />} />
+        <Route path="/new-recipe" element={<NewRecipeForm addRecipe={addRecipe} />} />
+      </Routes>
     </Router>
   );
 }
 
 export default App;
-

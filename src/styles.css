@@ -1,0 +1,197 @@
+/* styles.css */
+
+/* General Styles */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+    color: #333;
+}
+
+/* NavBar Styles */
+nav {
+    background-color: #4CAF50;
+    padding: 15px 20px;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    margin: 0 20px;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+nav a:hover {
+    text-decoration: underline;
+}
+
+/* Header */
+h1 {
+    color: #4CAF50;
+    text-align: center;
+    margin-top: 20px;
+    font-size: 2.5em;
+}
+
+/* Recipe List Styles */
+ul {
+    list-style: none;
+    padding: 0;
+    margin: 20px auto;
+    max-width: 800px;
+}
+
+ul li {
+    background-color: #ffffff;
+    margin: 15px 0;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+ul li:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+ul li a {
+    text-decoration: none;
+    color: #333;
+    font-size: 22px;
+    font-weight: 600;
+}
+
+ul li a:hover {
+    color: #4CAF50;
+}
+
+/* Recipe Details Styles */
+.recipe-detail {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 20px auto;
+    max-width: 800px;
+}
+
+.recipe-detail h2 {
+    color: #4CAF50;
+    font-size: 2em;
+    margin-bottom: 10px;
+}
+
+.recipe-detail p {
+    line-height: 1.6;
+    margin: 10px 0;
+}
+
+/* Form Styles */
+form {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 20px auto;
+    max-width: 800px;
+}
+
+input, textarea {
+    width: calc(100% - 22px);
+    padding: 12px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-sizing: border-box;
+}
+
+textarea {
+    height: 150px;
+}
+
+button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 18px;
+}
+
+button:hover {
+    background-color: #45a049;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    nav {
+        padding: 10px;
+    }
+
+    nav a {
+        margin: 0 10px;
+        font-size: 16px;
+    }
+
+    ul li {
+        margin: 10px 0;
+        padding: 10px;
+    }
+
+    input, textarea {
+        padding: 8px;
+    }
+
+    button {
+        padding: 10px 20px;
+        font-size: 16px;
+    }
+}
+
+/* styles.css */
+.delete-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 20px;
+    color: red;
+    transition: color 0.3s ease;
+  }
+  
+  .delete-button:hover {
+    color: darkred;
+  }
+  
+  .delete-button:focus {
+    outline: none;
+  }
+  
+/* styles.css */
+.star-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 24px;
+    color: gray;
+    transition: color 0.3s ease;
+  }
+  
+  .star-button.starred {
+    color: gold;
+  }
+  
+  .star-button:hover {
+    color: gold;
+  }
+  
+  .star-button:focus {
+    outline: none;
+  }
+  

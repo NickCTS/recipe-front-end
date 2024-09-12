@@ -1,25 +1,15 @@
-import React, { useState } from 'react';
+// RecipeSearch.js
+import React from 'react';
 
-function RecipeSearch({ recipes, setFilteredRecipes }) {
-  const [searchTerm, setSearchTerm] = useState('');
-
-  function handleSearch(e) {
-    const value = e.target.value.toLowerCase();
-    setSearchTerm(value);
-
-    const filtered = recipes.filter(recipe => 
-      recipe.name.toLowerCase().includes(value)
-    );
-    setFilteredRecipes(filtered);
-  }
-
+function RecipeSearch({ searchQuery, setSearchQuery }) {
   return (
-    <div>
+    <div className="search-container">
       <input
         type="text"
         placeholder="Search recipes..."
-        value={searchTerm}
-        onChange={handleSearch}
+        value={searchQuery}
+        onChange={(e) => setSearchQuery(e.target.value)}
+        className="search-bar"
       />
     </div>
   );

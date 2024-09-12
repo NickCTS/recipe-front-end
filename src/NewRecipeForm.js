@@ -1,43 +1,40 @@
+// NewRecipeForm.js
 import React, { useState } from 'react';
 
 function NewRecipeForm({ addRecipe }) {
-  const [formData, setFormData] = useState({ name: '', ingredients: '' });
+  const [name, setName] = useState('');
+  const [ingredients, setIngredients] = useState('');
+  const [steps, setSteps] = useState('');
 
-  function handleChange(e) {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  }
-
-  function handleSubmit(e) {
-    e.preventDefault();
-    const configObj = {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(formData),
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const newRecipe = {
+      id: Date.now().toString(), // or another unique ID generator
+      name,
+      ingredients,
+      steps,
+      starred: false,
     };
-    fetch('http://localhost:3001/recipes', configObj)
-      .then(res => res.json())
-      .then(newRecipe => {
-        addRecipe(newRecipe);
-        setFormData({ name: '', ingredients: '' });
-      });
-  }
+    addRecipe(newRecipe);
+    setName('');
+    setIngredients('');
+    setSteps('');
+  };
 
   return (
     <form onSubmit={handleSubmit}>
-      <input
-        type="text"
-        name="name"
-        placeholder="Recipe name"
-        value={formData.name}
-        onChange={handleChange}
-      />
-      <input
-        type="text"
-        name="ingredients"
-        placeholder="Ingredients"
-        value={formData.ingredients}
-        onChange={handleChange}
-      />
+      <label>
+        Name:
+        <input type="text" value={name} onChange={(e) => setName(e.target.value)} required />
+      </label>
+      <label>
+        Ingredients:
+        <textarea value={ingredients} onChange={(e) => setIngredients(e.target.value)} required />
+      </label>
+      <label>
+        Steps:
+        <textarea value={steps} onChange={(e) => setSteps(e.target.value)} required />
+      </label>
       <button type="submit">Add Recipe</button>
     </form>
   );
