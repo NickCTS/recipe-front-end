@@ -9,16 +9,26 @@ function NewRecipeForm({ addRecipe }) {
   const handleSubmit = (event) => {
     event.preventDefault();
     const newRecipe = {
-      id: Date.now().toString(), // or another unique ID generator
+      id: Date.now().toString(), // Server will assign ID
       name,
       ingredients,
       steps,
       starred: false,
     };
-    addRecipe(newRecipe);
-    setName('');
-    setIngredients('');
-    setSteps('');
+
+    fetch('http://localhost:3001/recipes', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(newRecipe),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        addRecipe(data); // Update local state
+        setName('');
+        setIngredients('');
+        setSteps('');
+      })
+      .catch((error) => console.error('Error adding recipe:', error));
   };
 
   return (
